@@ -27,11 +27,6 @@ package "bind9" do
   action :install
 end
 
-service "bind9" do
-  supports :status => true, :reload => true, :restart => true
-  action [ :enable, :start ]
-end
-
 template "/etc/bind/named.conf.options" do
   source "named.conf.options.erb"
   owner "root"
@@ -66,4 +61,9 @@ search(:zones).each do |zone|
       :records => zone['zone_info']['records']
     })
   end
+end
+
+service "bind9" do
+  supports :status => true, :reload => true, :restart => true
+  action [ :enable, :restart ]
 end

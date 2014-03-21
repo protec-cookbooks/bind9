@@ -12,7 +12,9 @@ options {
 
     <% end %>
       allow-recursion {
-        "<%= node[:bind9][:allow_recursion] %>";
+        <% node[:bind9][:allow_recursion_from].each do |recurser| -%>
+          <%= recurser %>;
+        <% end %>
       };
 
       allow-transfer {
@@ -41,7 +43,7 @@ options {
 
 logging {
   channel default_log {
-    file "/var/log/bind/bind.log" versions 5 size 128M;
+    file "/var/log/named/bind.log" versions 5 size 128M;
     print-time yes;
     print-severity yes;
     print-category yes;
