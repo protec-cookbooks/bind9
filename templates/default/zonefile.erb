@@ -12,10 +12,6 @@ $TTL <%= @global_ttl %>
                 IN              NS              <%= ns %>
 <% end %>
 
-<% @mail_exchange.each do |mx| -%>
-                IN              MX <%= mx['priority'] %>           <%= mx['host'] %>
-<% end %>
-
 <% @records.each do |record| -%>
 <%=record['name'] %>   <%= if record['ttl'] then record['ttl'] end %> IN   <%= record['type'] %>   <%= record['ip'] %>
 <% end %>
